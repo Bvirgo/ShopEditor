@@ -1,0 +1,163 @@
+fileFormatVersion: 2
+guid: 902843acf199f0548aef12788fddf277
+timeCreated: 1507710589
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Base
+    100002: //RootNode
+    100004: Dummy Prop Back
+    100006: Dummy Prop Head
+    100008: Dummy Prop Left
+    100010: Dummy Prop Right
+    100012: Placeholder Shield
+    100014: Placeholder Sword
+    100016: Rig
+    100018: RigHead
+    100020: RigHeadGizmo
+    100022: RigLArm1
+    100024: RigLArm1Gizmo
+    100026: RigLArm2
+    100028: RigLArm2Gizmo
+    100030: RigLArmPalm
+    100032: RigLArmPalmGizmo
+    100034: RigLLeg1
+    100036: RigLLeg2
+    100038: RigLLegAnkle
+    100040: RigLLegPlatform
+    100042: RigNeck
+    100044: RigPelvis
+    100046: RigPelvisGizmo
+    100048: RigRArm1
+    100050: RigRArm1Gizmo
+    100052: RigRArm2
+    100054: RigRArm2Gizmo
+    100056: RigRArmPalm
+    100058: RigRArmPalmGizmo
+    100060: RigRibcage
+    100062: RigRibcageGizmo
+    100064: RigRLeg1
+    100066: RigRLeg2
+    100068: RigRLegAnkle
+    100070: RigRLegPlatform
+    100072: RigSpine1
+    100074: RigSpine2
+    400000: Base
+    400002: //RootNode
+    400004: Dummy Prop Back
+    400006: Dummy Prop Head
+    400008: Dummy Prop Left
+    400010: Dummy Prop Right
+    400012: Placeholder Shield
+    400014: Placeholder Sword
+    400016: Rig
+    400018: RigHead
+    400020: RigHeadGizmo
+    400022: RigLArm1
+    400024: RigLArm1Gizmo
+    400026: RigLArm2
+    400028: RigLArm2Gizmo
+    400030: RigLArmPalm
+    400032: RigLArmPalmGizmo
+    400034: RigLLeg1
+    400036: RigLLeg2
+    400038: RigLLegAnkle
+    400040: RigLLegPlatform
+    400042: RigNeck
+    400044: RigPelvis
+    400046: RigPelvisGizmo
+    400048: RigRArm1
+    400050: RigRArm1Gizmo
+    400052: RigRArm2
+    400054: RigRArm2Gizmo
+    400056: RigRArmPalm
+    400058: RigRArmPalmGizmo
+    400060: RigRibcage
+    400062: RigRibcageGizmo
+    400064: RigRLeg1
+    400066: RigRLeg2
+    400068: RigRLegAnkle
+    400070: RigRLegPlatform
+    400072: RigSpine1
+    400074: RigSpine2
+    2300000: Placeholder Shield
+    2300002: Placeholder Sword
+    3300000: Placeholder Shield
+    3300002: Placeholder Sword
+    4300000: Base
+    4300002: Placeholder Shield
+    4300004: Placeholder Sword
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Base
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
