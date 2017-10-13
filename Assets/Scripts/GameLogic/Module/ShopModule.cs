@@ -132,6 +132,9 @@ public class ShopModule : BaseModule
         MessageCenter.Instance.AddListener(MsgType.ShopView_DeleteShop,DeleteShopItem);
         MessageCenter.Instance.AddListener(MsgType.ShopView_DeleteBoard,DeleteBoardItem);
         MessageCenter.Instance.AddListener(MsgType.ShopView_LocalSave, SaveEditingShopDataConfig2Local);
+        MessageCenter.Instance.AddListener(MsgType.ShopView_OnlyBoard,OnlyBoardModel);
+        MessageCenter.Instance.AddListener(MsgType.ShopView_OnlyShop, OnlyShopModel);
+        MessageCenter.Instance.AddListener(MsgType.ShopView_ShopAndBoard, ShopAndBoardModel);
 
     }
 
@@ -144,6 +147,10 @@ public class ShopModule : BaseModule
         MessageCenter.Instance.RemoveListener(MsgType.ShopView_NewPoint, NewPoint);
         MessageCenter.Instance.RemoveListener(MsgType.ShopView_DeleteShop, DeleteShopItem);
         MessageCenter.Instance.RemoveListener(MsgType.ShopView_DeleteBoard, DeleteBoardItem);
+        MessageCenter.Instance.RemoveListener(MsgType.ShopView_LocalSave, SaveEditingShopDataConfig2Local);
+        MessageCenter.Instance.RemoveListener(MsgType.ShopView_OnlyBoard, OnlyBoardModel);
+        MessageCenter.Instance.RemoveListener(MsgType.ShopView_OnlyShop, OnlyShopModel);
+        MessageCenter.Instance.RemoveListener(MsgType.ShopView_ShopAndBoard, ShopAndBoardModel);
     }
 
     private void ShowView(Message _msg)
@@ -1384,6 +1391,57 @@ public class ShopModule : BaseModule
         Message msg = new Message(MsgType.ShopView_RefreshShopList, this);
         msg["data"] = pList;
         msg.Send();
+    }
+
+    /// <summary>
+    /// Only Shop 
+    /// </summary>
+    /// <param name="_msg"></param>
+    private void OnlyShopModel(Message _msg)
+    {
+        if (CurSelectShopModel != null && CurSelectShopModel.ShopSignList != null)
+        {
+            for (int iSS = 0, nSS = CurSelectShopModel.ShopSignList.Count; iSS < nSS; iSS++)
+            {
+                ShopSignVO ss = CurSelectShopModel.ShopSignList[iSS];
+                ss.PrefabType = ShopSignVO.PrefabTypeOnlyShop;
+            }
+            CurSelectShopModel.CreateShops();
+        }
+    }
+
+    /// <summary>
+    /// Only Board
+    /// </summary>
+    /// <param name="_msg"></param>
+    private void OnlyBoardModel(Message _msg)
+    {
+        if (CurSelectShopModel != null && CurSelectShopModel.ShopSignList != null)
+        {
+            for (int iSS = 0, nSS = CurSelectShopModel.ShopSignList.Count; iSS < nSS; iSS++)
+            {
+                ShopSignVO ss = CurSelectShopModel.ShopSignList[iSS];
+                ss.PrefabType = ShopSignVO.PrefabTypeOnlySign;
+            }
+            CurSelectShopModel.CreateShops();
+        }
+    }
+
+    /// <summary>
+    /// Board And Shop
+    /// </summary>
+    /// <param name="_msg"></param>
+    private void ShopAndBoardModel(Message _msg)
+    {
+        if (CurSelectShopModel != null && CurSelectShopModel.ShopSignList != null)
+        {
+            for (int iSS = 0, nSS = CurSelectShopModel.ShopSignList.Count; iSS < nSS; iSS++)
+            {
+                ShopSignVO ss = CurSelectShopModel.ShopSignList[iSS];
+                ss.PrefabType = ShopSignVO.PrefabTypeShopSign;
+            }
+            CurSelectShopModel.CreateShops();
+        }
     }
     #endregion
 }

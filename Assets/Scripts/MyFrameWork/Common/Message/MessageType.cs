@@ -63,6 +63,10 @@ namespace MyFrameWork
 
         public const string ShopView_NewPoint = "ShopView_NewPoint";
         public const string ShopView_CancelPoint = "ShopView_CancelPoint";
+
+        public const string ShopView_OnlyShop = "ShopView_OnlyShop";
+        public const string ShopView_OnlyBoard = "ShopView_OnlyBoard";
+        public const string ShopView_ShopAndBoard = "ShopView_ShopBoard";
         #endregion
 
         #region Component Editor

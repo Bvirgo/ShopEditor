@@ -93,6 +93,24 @@ public class ShopView : BaseUI
             Message msg = new Message(MsgType.ShopView_CancelPoint,this);
             msg.Send();
         });
+
+        btn_onlyBoard.onClick.AddListener(()=> 
+        {
+            Message msg = new Message(MsgType.ShopView_OnlyBoard,this);
+            msg.Send();
+        });
+
+        btn_onlyShop.onClick.AddListener(() =>
+        {
+            Message msg = new Message(MsgType.ShopView_OnlyShop, this);
+            msg.Send();
+        });
+
+        btn_shopAndBoard.onClick.AddListener(() =>
+        {
+            Message msg = new Message(MsgType.ShopView_ShopAndBoard, this);
+            msg.Send();
+        });
     }
 
     private void RegisterMsg()
@@ -183,16 +201,6 @@ public class ShopView : BaseUI
 
             InputField ipt_shopName = tf.Find("ipt_shopName").GetComponent<InputField>();
             Toggle tg = tf.GetComponent<Toggle>();
-            tg.onValueChanged.AddListener(bGo => 
-            {
-                if (bGo)
-                {
-                    Message msg = new Message(MsgType.ShopView_SampleBoardClicked, this);
-                    msg["data"] = ssv;
-                    msg.Send();
-                    Debug.Log("Click SampleBoard:" + ssv.GetText("ShopCode"));
-                }
-            });
             tg.group = tgg;
 
             Button btn_close = tf.Find("btn_close").GetComponent<Button>();
@@ -222,6 +230,17 @@ public class ShopView : BaseUI
             {
                 ipt_shopName.enabled = false;
                 ipt_shopName.interactable = false;
+
+                tg.onValueChanged.AddListener(bGo =>
+                {
+                    if (bGo)
+                    {
+                        Message msg = new Message(MsgType.ShopView_SampleBoardClicked, this);
+                        msg["data"] = ssv;
+                        msg.Send();
+                        Debug.Log("Click SampleBoard:" + ssv.GetText("ShopCode"));
+                    }
+                });
             }
             txt_index.text = i.ToString();
             txt_shopCode.text = ssv.GetText("ShopCode");
