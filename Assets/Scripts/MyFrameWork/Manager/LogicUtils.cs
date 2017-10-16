@@ -164,21 +164,6 @@ namespace MyFrameWork
         }
         #endregion
 
-        #region Transform
-        public void RemoveChildren(Transform _tf)
-        {
-            if (_tf != null)
-            {
-                for (int i = _tf.childCount -1; i >=0 ; i--)
-                {
-                    GameObject obj = _tf.GetChild(i).gameObject;
-                    
-                    GameObject.Destroy(obj);
-                }
-            }
-        }
-        #endregion
-
         #region Material
         /// <summary>
         /// shader检查
@@ -212,7 +197,7 @@ namespace MyFrameWork
         #region Keyboard Event
         void FixedUpdate()
         {
-            if (!Utils.IsUI())
+            if (!Utils.IsOnUI)
             {
                 if (Input.anyKeyDown)
                 {

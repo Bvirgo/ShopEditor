@@ -228,7 +228,7 @@ namespace MyFrameWork
         {
             AssetInfo _assetInfo = GetAssetInfo(_path, _loaded);
             if (null != _assetInfo)
-                CoroutineController.Instance.StartCoroutine(_assetInfo.GetCoroutineObject(_loaded));
+                MonoHelper.Instance.StartCoroutine(_assetInfo.GetCoroutineObject(_loaded));
         }
         #endregion
 
@@ -254,7 +254,7 @@ namespace MyFrameWork
         {
             AssetInfo _assetInfo = GetAssetInfo(_path, _loaded);
             if (null != _assetInfo)
-                CoroutineController.Instance.StartCoroutine(_assetInfo.GetAsyncObject(_loaded, _progress));
+                MonoHelper.Instance.StartCoroutine(_assetInfo.GetAsyncObject(_loaded, _progress));
         }
         #endregion
 

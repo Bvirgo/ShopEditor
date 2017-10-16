@@ -33,7 +33,7 @@ public class LoginModule : BaseModule {
         string strUser = _msg["user"].ToString();
         string strPsw = _msg["psw"].ToString();
 
-        Message msg;
+        //Message msg;
         LogicUtils.Instance.OnShowWaiting(1, "Login...",true);
 
         HttpService.Login(strUser, strPsw, (success, resp) =>
@@ -44,9 +44,10 @@ public class LoginModule : BaseModule {
                 UserCache.SetUserName(strUser);
                 UserCache.SetPassword(strPsw);
                 //JsonData js = JsonMapper.ToObject(resp.WwwText);
-                //msg = new Message(MsgType.MainView_Show, this);
-                msg = new Message(MsgType.ShopView_Show, this);
-                msg.Send();
+                //msg = new Message(MsgType.ShopView_Show, this);
+                //msg.Send();
+
+                LevelManager.Instance.ChangeSceneDirect(ScnType.ShopEditor, UIType.ShopEditor);
             }
             else
             {

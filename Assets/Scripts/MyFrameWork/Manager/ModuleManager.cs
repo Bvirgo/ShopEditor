@@ -43,20 +43,14 @@ namespace MyFrameWork
         #endregion
 
         #region Register Module By Module Type
+
         /// <summary>
-        /// Register All Module
+        /// Regeiste One Module
         /// </summary>
-        public void RegisterAllModules()
+        /// <param name="_moduleType"></param>
+        public void RegisterModule(Type _moduleType)
         {
-            LoadModule(typeof(WaitingModule));
-
-            LoadModule(typeof(LoginModule));
-            
-            LoadModule(typeof(WindowModule));
-
-            LoadModule(typeof(ShopModule));
-
-            //.....add
+            LoadModule(_moduleType);
         }
 
         /// <summary>

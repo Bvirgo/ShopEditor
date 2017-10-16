@@ -8,7 +8,7 @@ using System.IO;
 using MyFrameWork;
 using System.Text;
 
-public class ShopModelMono : MonoBehaviour, IJsonData, IMouseCtrl, IListData
+public class ShopModelMono : MonoBehaviour, IJsonData, IListData
 {
     public string BuildingName;
     public List<Vector3> PointList;
@@ -71,7 +71,7 @@ public class ShopModelMono : MonoBehaviour, IJsonData, IMouseCtrl, IListData
 
     public void Move(Vector3 dir)
     {
-        Debug.Log("move");
+        //Debug.Log("move");
         //transform.position += dir;
         Vector3 moveDelta;
         if (dir == Vector3.up || dir == Vector3.down)
@@ -294,47 +294,6 @@ public class ShopModelMono : MonoBehaviour, IJsonData, IMouseCtrl, IListData
     {
         Utils.ForAllChildren(gameObject, tar => { tar.SetActive(flag); }, false);
     }
-
-    #region MouseCtrl
-
-    public void MouseDown(Vector2 screenPoint, Vector3 worldPoint, int mouse)
-    {
-        //throw new System.NotImplementedException();
-    }
-
-    public void MouseUp(Vector2 screenPoint, Vector3 worldPoint, int mouse)
-    {
-        //throw new System.NotImplementedException();
-    }
-
-    public void MouseClick(Vector2 screenPoint, Vector3 worldPoint, int mouse)
-    {
-        //throw new System.NotImplementedException();
-
-        Debug.LogWarning(string.Format("Building:{0},Is Choosed!",name));
-
-    }
-
-    public void MouseDoubleClick(Vector2 screenPoint, Vector3 worldPoint, int mouse)
-    {
-        //throw new System.NotImplementedException();
-    }
-
-    public void OnDragStart(Vector2 screenPoint, Vector3 worldPoint, int mouse)
-    {
-        //throw new System.NotImplementedException();
-    }
-
-    public void OnDraging(Vector2 screenPoint, Vector3 worldPoint, int mouse)
-    {
-        //throw new System.NotImplementedException();
-    }
-
-    public void OnDragEnd(Vector2 screenPoint, Vector3 worldPoint, int mouse)
-    {
-        //throw new System.NotImplementedException();
-    }
-    #endregion
 
     #region JsonData
 

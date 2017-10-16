@@ -51,7 +51,7 @@ namespace MyFrameWork
         /// The dic open U is.
         /// </summary>
         private Dictionary<UIType, GameObject> dicOpenUIs = null;
-
+        
         /// <summary>
         /// The stack open U is.
         /// </summary>
@@ -200,7 +200,7 @@ namespace MyFrameWork
 			{
                 if (_bAsync)
                 {
-                    CoroutineController.Instance.StartCoroutine(AsyncLoadData());
+                    MonoHelper.Instance.StartCoroutine(AsyncLoadData());
                 }
                 else
                 {
@@ -351,8 +351,9 @@ namespace MyFrameWork
 				}
 				else
 				{
-					GameObject.Destroy(_uiObj);
-					dicOpenUIs.Remove(_uiType);
+                    GameObject.Destroy(_uiObj);
+
+                    dicOpenUIs.Remove(_uiType);
 				}
 			}
 		}

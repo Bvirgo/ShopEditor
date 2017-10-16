@@ -1190,8 +1190,6 @@ namespace PathologicalGames
 
     }
 
-
-
     /// <summary>
     /// This class is used to display a more complex user entry interface in the 
     /// Unity Editor so we can collect more options related to each Prefab.

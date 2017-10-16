@@ -32,13 +32,13 @@ namespace MyFrameWork
         #endregion
 
         #region Base Data
-        private Dictionary<EnumSceneType, SceneInfoData> dicSceneInfos = null;
+        private Dictionary<ScnType, SceneInfoData> dicSceneInfos = null;
 
         private BaseScene currentScene = new BaseScene();
 
-        public EnumSceneType LastSceneType { get; set; }
+        public ScnType LastSceneType { get; set; }
 
-        public EnumSceneType ChangeSceneType { get; private set; }
+        public ScnType ChangeSceneType { get; private set; }
 
         private UIType sceneOpenUIType = UIType.None;
         private object[] sceneOpenUIParams = null;
@@ -58,21 +58,25 @@ namespace MyFrameWork
 
         public override void Init()
         {
-            dicSceneInfos = new Dictionary<EnumSceneType, SceneInfoData>();
+            dicSceneInfos = new Dictionary<ScnType, SceneInfoData>();
         }
 
+        public void OnInit()
+        {
+            // Registe All Scene
+            RegisterAllScene();
+        }
         #endregion
 
         #region Scene Register & UnRegister
         /// <summary>
         /// 场景注册
         /// </summary>
-        public void RegisterAllScene()
+        private void RegisterAllScene()
         {
-            RegisterScene(EnumSceneType.StartGame, "StartGameScene", null, null);
-            RegisterScene(EnumSceneType.LoginScene, "LoginScene", typeof(BaseScene), null);
-            RegisterScene(EnumSceneType.MainScene, "MainScene", null, null);
-            RegisterScene(EnumSceneType.CopyScene, "CopyScene", null, null);
+            RegisterScene(ScnType.LoginScene, "LoginScene", typeof(LoginScn), null);
+
+            RegisterScene(ScnType.ShopEditor, ScnType.ShopEditor.ToString(), typeof(ShopEditorScn), null);
         }
 
         /// <summary>
@@ -82,7 +86,7 @@ namespace MyFrameWork
         /// <param name="_sceneName">关卡名</param>
         /// <param name="_sceneType">关卡管理类</param>
         /// <param name="_params">参数</param>
-        public void RegisterScene(EnumSceneType _sceneID, string _sceneName, Type _sceneType, params object[] _params)
+        private void RegisterScene(ScnType _sceneID, string _sceneName, Type _sceneType, params object[] _params)
         {
             if (_sceneType == null || _sceneType.BaseType != typeof(BaseScene))
             {
@@ -95,7 +99,7 @@ namespace MyFrameWork
             }
         }
 
-        public void UnRegisterScene(EnumSceneType _sceneID)
+        public void UnRegisterScene(ScnType _sceneID)
         {
             if (dicSceneInfos.ContainsKey(_sceneID))
             {
@@ -103,12 +107,12 @@ namespace MyFrameWork
             }
         }
 
-        public bool IsRegisterScene(EnumSceneType _sceneID)
+        public bool IsRegisterScene(ScnType _sceneID)
         {
             return dicSceneInfos.ContainsKey(_sceneID);
         }
 
-        internal BaseScene GetBaseScene(EnumSceneType _sceneType)
+        internal BaseScene GetBaseScene(ScnType _sceneType)
         {
             Debug.Log(" GetBaseScene  sceneId = " + _sceneType.ToString());
             SceneInfoData sceneInfo = GetSceneInfo(_sceneType);
@@ -120,7 +124,7 @@ namespace MyFrameWork
             return scene;
         }
 
-        public SceneInfoData GetSceneInfo(EnumSceneType _sceneID)
+        public SceneInfoData GetSceneInfo(ScnType _sceneID)
         {
             if (dicSceneInfos.ContainsKey(_sceneID))
             {
@@ -130,7 +134,7 @@ namespace MyFrameWork
             return null;
         }
 
-        public string GetSceneName(EnumSceneType _sceneID)
+        public string GetSceneName(ScnType _sceneID)
         {
             if (dicSceneInfos.ContainsKey(_sceneID))
             {
@@ -152,7 +156,7 @@ namespace MyFrameWork
         /// 直接切换
         /// </summary>
         /// <param name="_sceneType"></param>
-        public void ChangeSceneDirect(EnumSceneType _sceneType)
+        public void ChangeSceneDirect(ScnType _sceneType)
 		{
 			UIManager.Instance.CloseUIAll();
 
@@ -164,9 +168,21 @@ namespace MyFrameWork
 
 			LastSceneType = ChangeSceneType;
 			ChangeSceneType = _sceneType;
+            SceneInfoData sid = GetSceneInfo(_sceneType);
 			string sceneName = GetSceneName(_sceneType);
+           
 			//change scene
-			CoroutineController.Instance.StartCoroutine(AsyncLoadScene(sceneName));
+			MonoHelper.Instance.StartCoroutine(AsyncLoadScene(sceneName,()=> 
+            {
+                // 注册场景Module
+                ModuleManager.Instance.RegisterModule(sid.SceneType);
+
+                if (sceneOpenUIType != UIType.None)
+                {
+                    UIManager.Instance.OpenUICloseOthers(sceneOpenUIType, false, sceneOpenUIParams);
+                    sceneOpenUIType = UIType.None;
+                }
+            }));
 		}
 
         /// <summary>
@@ -175,50 +191,54 @@ namespace MyFrameWork
         /// <param name="_sceneType"></param>
         /// <param name="_uiType"></param>
         /// <param name="_params"></param>
-		public void ChangeSceneDirect(EnumSceneType _sceneType, UIType _uiType, params object[] _params)
+		public void ChangeSceneDirect(ScnType _sceneType, UIType _uiType, params object[] _params)
 		{
 			sceneOpenUIType = _uiType;
 			sceneOpenUIParams = _params;
 
-            // 场景已经切换
-			if (LastSceneType == _sceneType)
-			{
-                // 场景对应UI已经打开
-				if (sceneOpenUIType == UIType.None)
-				{
-					return;
-				}
-                // 场景已经切换了，但是对应UI没有打开
-				UIManager.Instance.OpenUI( sceneOpenUIType, false,sceneOpenUIParams);
-				sceneOpenUIType = UIType.None;
-			}else
-			{
-				ChangeSceneDirect(_sceneType);
-			}
-		}
+            if (ChangeSceneType != _sceneType)
+            {
+                ChangeSceneDirect(_sceneType);
+            }
+
+            //         // 场景已经切换
+            //if (LastSceneType == _sceneType)
+            //{
+            //             // 场景对应UI已经打开
+            //	if (sceneOpenUIType == UIType.None)
+            //	{
+            //		return;
+            //	}
+            //             // 场景已经切换了，但是对应UI没有打开
+            //	UIManager.Instance.OpenUICloseOthers( sceneOpenUIType, false,sceneOpenUIParams);
+            //	sceneOpenUIType = UIType.None;
+            //}else
+            //{
+                //ChangeSceneDirect(_sceneType);
+            //}
+        }
 
         /// <summary>
         /// 异步加载场景
         /// </summary>
         /// <param name="sceneName"></param>
         /// <returns></returns>
-		private IEnumerator<AsyncOperation> AsyncLoadScene(string sceneName)
+		private IEnumerator<AsyncOperation> AsyncLoadScene(string sceneName,Action _cb = null)
 		{
             AsyncOperation oper = SceneManager.LoadSceneAsync(sceneName);
 
             yield return oper;
-			// message send
+            // message send
 
-			if (sceneOpenUIType != UIType.None)
-			{
-				UIManager.Instance.OpenUI(sceneOpenUIType,false ,sceneOpenUIParams);
-				sceneOpenUIType = UIType.None;
-			}
+            if (_cb != null)
+            {
+                _cb();
+            }
 		}
         #endregion
 
         #region Change Scene By Loading (场景过渡切换)
-        public void ChangeScene(EnumSceneType _sceneType)
+        public void ChangeScene(ScnType _sceneType)
         {
             UIManager.Instance.CloseUIAll();
 
@@ -227,11 +247,10 @@ namespace MyFrameWork
                 CurrentScene.Release();
                 CurrentScene = null;
             }
-
             LastSceneType = ChangeSceneType;
             ChangeSceneType = _sceneType;
             //change loading scene
-            CoroutineController.Instance.StartCoroutine(AsyncLoadOtherScene());
+            MonoHelper.Instance.StartCoroutine(AsyncLoadOtherScene());
         }
 
         /// <summary>
@@ -240,7 +259,7 @@ namespace MyFrameWork
         /// <param name="_sceneType"></param>
         /// <param name="_uiType"></param>
         /// <param name="_params"></param>
-        public void ChangeScene(EnumSceneType _sceneType, UIType _uiType, params object[] _params)
+        public void ChangeScene(ScnType _sceneType, UIType _uiType, params object[] _params)
         {
             sceneOpenUIType = _uiType;
             sceneOpenUIParams = _params;
@@ -261,7 +280,7 @@ namespace MyFrameWork
 
         private IEnumerator AsyncLoadOtherScene()
         {
-            string sceneName = GetSceneName(EnumSceneType.LoadingScene);
+            string sceneName = GetSceneName(ScnType.LoadingScene);
             AsyncOperation oper = SceneManager.LoadSceneAsync(sceneName);
             yield return oper;
             // message send

@@ -296,8 +296,6 @@ namespace PathologicalGames
         }
         #endregion Public Custom Memebers
 
-
-
         #region Dict Functionality
         // Internal (wrapped) dictionary
         private Dictionary<string, SpawnPool> _pools = new Dictionary<string, SpawnPool>();

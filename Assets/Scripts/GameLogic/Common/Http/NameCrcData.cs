@@ -126,7 +126,7 @@ namespace ArtsWork
 
         void ActionReqest_RemoteGetData(List<object> listPms)
         {
-            CoroutineController.Instance.StartCoroutine(Co_Reqest_RemoteGetData());
+            MyFrameWork.MonoHelper.Instance.StartCoroutine(Co_Reqest_RemoteGetData());
         }
 
         IEnumerator Co_Reqest_RemoteGetData()

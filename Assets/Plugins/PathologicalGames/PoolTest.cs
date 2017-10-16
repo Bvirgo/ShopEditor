@@ -74,7 +74,7 @@ public class PoolTest : MonoBehaviour {
         if (!spawnPool._perPrefabPoolOptions.Contains(r1))
         {
             //r1 = new PrefabPool(Resources.Load<Transform>("momo"));
-            //默认初始化两个Prefab实例
+            //默认初始化5个Prefab实例
             r1.preloadAmount = 5;
             //开启限制
             r1.limitInstances = true;

@@ -127,8 +127,8 @@ public class MainView : BaseUI {
         m_pTags = _msg["tags"] as List<string>;
         int nLength = m_nTag * m_pTags.Count;
 
-        LogicUtils.Instance.RemoveChildren(tagGrid);
-        LogicUtils.Instance.RemoveChildren(comGrid);
+        Utils.RemoveChildren(tagGrid);
+        Utils.RemoveChildren(comGrid);
         CleanUI();
 
         RectTransform rtf = tagGrid.GetComponent<RectTransform>();
@@ -170,7 +170,7 @@ public class MainView : BaseUI {
 
         int nLength = m_nComp * m_pComProperty.Count;
 
-        LogicUtils.Instance.RemoveChildren(comGrid);
+        Utils.RemoveChildren(comGrid);
 
         RectTransform rtf = comGrid.GetComponent<RectTransform>();
         rtf.sizeDelta = new Vector2(nLength, rtf.sizeDelta.y);

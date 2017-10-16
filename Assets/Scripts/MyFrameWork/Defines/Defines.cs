@@ -161,7 +161,7 @@ namespace MyFrameWork
     /// <summary>
     /// 场景类型
     /// </summary>
-    public enum EnumSceneType
+    public enum ScnType
     {
         None = 0,
         StartGame,
@@ -171,6 +171,10 @@ namespace MyFrameWork
         CopyScene,
         PVPScene,
         PVEScene,
+        /////////////
+        Login,
+        ShopEditor,
+        CompEditor,
     }
 
     #endregion

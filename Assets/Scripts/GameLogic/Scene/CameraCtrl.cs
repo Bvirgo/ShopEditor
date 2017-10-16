@@ -88,7 +88,7 @@ public class CameraCtrl : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Utils.IsUI())
+        if (Utils.IsOnUI)
         {
             //Debug.LogWarning("Is Ui................");
             return;

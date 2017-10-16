@@ -991,6 +991,14 @@ public static class Utils
     }
 
     /// <summary>
+    /// 鼠标是否在UGUI上
+    /// </summary>
+    public static bool IsOnUI
+    {
+        get { return IsUI(); }
+    }
+
+    /// <summary>
     /// 设置RectTransform
     /// </summary>
     /// <param name="_tf"></param>
@@ -1000,8 +1008,6 @@ public static class Utils
     {
         if (_tf != null)
         {
-            RemoveChildren(_tf);
-            
             RectTransform rtf = _tf.GetComponent<RectTransform>();
 
             if (-1 == _fX)

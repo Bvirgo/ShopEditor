@@ -220,7 +220,7 @@ namespace MyFrameWork
         public void SetUIWhenOpening(params object[] uiParams)
         {
             SetUI(uiParams);
-            CoroutineController.Instance.StartCoroutine(AsyncOnLoadData());
+            MonoHelper.Instance.StartCoroutine(AsyncOnLoadData());
         }
 
         private IEnumerator AsyncOnLoadData()

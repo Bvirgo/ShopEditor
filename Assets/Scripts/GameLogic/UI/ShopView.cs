@@ -32,9 +32,9 @@ public class ShopView : BaseUI
     private int m_nShopGrid;
     private int m_nBoardGrid;
     private int m_nSampleBoard;
-
-    private GameObject m_objSampleBoard;
-    private GameObject m_objShopItem;
+    
+    private string m_strSampleBoardItem;
+    private string m_strShopItem;
 
     enum RefreshType
     {
@@ -71,8 +71,15 @@ public class ShopView : BaseUI
         m_nBoardGrid = 155;
         m_nSampleBoard = 155;
 
-        m_objSampleBoard = ResManager.Instance.Load(UIPathDefines.UI_PREFAB + "SampleBoardItem") as GameObject;
-        m_objShopItem = ResManager.Instance.Load(UIPathDefines.UI_PREFAB + "ShopItem") as GameObject;
+        m_strSampleBoardItem = "SampleBoardItem";
+        m_strShopItem = "ShopItem";
+
+        //m_objSampleBoard = ResManager.Instance.Load(UIPathDefines.UI_PREFAB + "SampleBoardItem") as GameObject;
+        //m_objShopItem = ResManager.Instance.Load(UIPathDefines.UI_PREFAB + "ShopItem") as GameObject;
+
+        //  UI Pool
+        UIPoolManager.Instance.PushPrefab(m_strSampleBoardItem);
+        UIPoolManager.Instance.PushPrefab(m_strShopItem);
 
         btn_load.onClick.AddListener(()=> 
         {
@@ -139,7 +146,7 @@ public class ShopView : BaseUI
         List<ShopSignVO> pSsv = _msg["data"] as List<ShopSignVO>;
         if (pSsv != null)
         {
-            CoroutineController.Instance.StartCoroutine(RefreshBoardItemList(pSsv,RefreshType.SampleBoardList));
+            MyFrameWork.MonoHelper.Instance.StartCoroutine(RefreshBoardItemList(pSsv, RefreshType.SampleBoardList));
         }
     }
 
@@ -152,7 +159,7 @@ public class ShopView : BaseUI
         List<ShopSignVO> pSsv = _msg["data"] as List<ShopSignVO>;
         if (pSsv != null)
         {
-            CoroutineController.Instance.StartCoroutine(RefreshBoardItemList(pSsv, RefreshType.BoardList));
+            MyFrameWork.MonoHelper.Instance.StartCoroutine(RefreshBoardItemList(pSsv, RefreshType.BoardList));
         }
         else
         {
@@ -170,11 +177,12 @@ public class ShopView : BaseUI
     /// <returns></returns>
     private IEnumerator RefreshBoardItemList(List<ShopSignVO> _pSss,RefreshType _rType)
     {
-        GameObject objPrefab = m_objSampleBoard;
         int nGridHeight = _rType == RefreshType.BoardList ? m_nBoardGrid : m_nSampleBoard;
         Transform tfGrid = _rType == RefreshType.BoardList ? boardGrid : sampleBoardGrid;
 
         int nLenth = nGridHeight * _pSss.Count;
+        UIPoolManager.Instance.DeSpawnAll(tfGrid);
+
         if (_rType == RefreshType.SampleBoardList)
         {
             Utils.ResetRectTransform(tfGrid, -1, nLenth);
@@ -189,7 +197,9 @@ public class ShopView : BaseUI
         for (int i = 0; i < _pSss.Count; i++)
         {
             ShopSignVO ssv = _pSss[i];
-            Transform tf = GameObject.Instantiate(objPrefab).transform;
+            //Transform tf = GameObject.Instantiate(objPrefab).transform;
+            Transform tf = UIPoolManager.Instance.OnGetItem(m_strSampleBoardItem);
+
             Image img_top = tf.Find("img_top").GetComponent<Image>();
             Image img_center = tf.Find("img_center").GetComponent<Image>();
 
@@ -285,6 +295,7 @@ public class ShopView : BaseUI
         {
             int nLenth = m_nShopGrid * pMsg.Count;
 
+            UIPoolManager.Instance.DeSpawnAll(shopsGrid);
             Utils.ResetRectTransform(shopsGrid, -1, nLenth);
             ToggleGroup tgg = shopsGrid.GetComponent<ToggleGroup>();
             Utils.ResetScrollSensitivity(shopsGrid.parent, nLenth);
@@ -292,7 +303,8 @@ public class ShopView : BaseUI
             for (int i = 0; i < pMsg.Count; i++)
             {
                 Message smm = pMsg[i];
-                Transform tfShopItem = GameObject.Instantiate(m_objShopItem).transform;
+                //Transform tfShopItem = GameObject.Instantiate(m_objShopItem).transform;
+                Transform tfShopItem = UIPoolManager.Instance.OnGetItem(m_strShopItem);
                 Text txt_index = tfShopItem.Find("txt_index").GetComponent<Text>();
                 Text txt_info = tfShopItem.Find("txt_info").GetComponent<Text>();
                 Button btn_close = tfShopItem.Find("btn_close").GetComponent<Button>();

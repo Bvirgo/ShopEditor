@@ -95,7 +95,7 @@ namespace MyFrameWork
 
         void Update()
         {
-            if (!Utils.IsUI())
+            if (!Utils.IsOnUI)
             {
                 CheckMouse();
             }

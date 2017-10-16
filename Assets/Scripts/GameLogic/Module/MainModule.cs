@@ -334,7 +334,7 @@ public class MainModule : BaseModule {
     {
         tag_comPropertys.Clear();
         m_pComProperty.Clear();
-        LogicUtils.Instance.RemoveChildren(m_objRoot.transform);
+        Utils.RemoveChildren(m_objRoot.transform);
 
         // 加载组件配置
         LoadCompConfig((js) => {
@@ -667,7 +667,7 @@ public class MainModule : BaseModule {
     /// <param name="_strName"></param>
     private void CreateNewModel(GameObject _go,string _strName)
     {
-        LogicUtils.Instance.RemoveChildren(m_objRoot.transform);
+        Utils.RemoveChildren(m_objRoot.transform);
 
         GameObject compObj = new GameObject();
         compObj.name = _strName;

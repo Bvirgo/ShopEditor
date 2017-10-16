@@ -13,6 +13,9 @@ using MyFrameWork;
 using ReadWriteCsv;
 using System.Drawing;
 
+/// <summary>
+/// 走向图模块
+/// </summary>
 public class ShopModule : BaseModule
 {
 
@@ -114,6 +117,9 @@ public class ShopModule : BaseModule
         loadModelPrefab(() => { });
 
         RegisterMsg();
+
+        // 注册Update
+        MonoHelper.Instance.UpdateRegister(MoveShopModel);
     }
 
     protected override void OnRelease()
@@ -124,7 +130,7 @@ public class ShopModule : BaseModule
 
     private void RegisterMsg()
     {
-        MessageCenter.Instance.AddListener(MsgType.ShopView_Show, ShowView);
+
         MessageCenter.Instance.AddListener(MsgType.ShopView_LoadRoute, LoadShopRoute);
         MessageCenter.Instance.AddListener(MsgType.ShopView_ShopItemClicked, ClickShopItem);
         MessageCenter.Instance.AddListener(MsgType.ShopView_SampleBoardClicked,ClickSampleBoardItem);
@@ -140,7 +146,6 @@ public class ShopModule : BaseModule
 
     private void UnRegisterMsg()
     {
-        MessageCenter.Instance.RemoveListener(MsgType.ShopView_Show, ShowView);
         MessageCenter.Instance.RemoveListener(MsgType.ShopView_LoadRoute, LoadShopRoute);
         MessageCenter.Instance.RemoveListener(MsgType.ShopView_ShopItemClicked, ClickShopItem);
         MessageCenter.Instance.RemoveListener(MsgType.ShopView_SampleBoardClicked, ClickSampleBoardItem);
@@ -151,24 +156,7 @@ public class ShopModule : BaseModule
         MessageCenter.Instance.RemoveListener(MsgType.ShopView_OnlyBoard, OnlyBoardModel);
         MessageCenter.Instance.RemoveListener(MsgType.ShopView_OnlyShop, OnlyShopModel);
         MessageCenter.Instance.RemoveListener(MsgType.ShopView_ShopAndBoard, ShopAndBoardModel);
-    }
-
-    private void ShowView(Message _msg)
-    {
-        UIManager.Instance.OpenUICloseOthers(UIType.ShopEditor, false);
-
-        JHQCHelper.Instance.OnInitScene();
-
-        LoadTestBuilding();
-    }
-
-    private void LoadTestBuilding()
-    {
-        // 加载一个测试建筑
-        GameObject objBuilding = ResManager.Instance.LoadInstance(Defines.WhiteHousePath) as GameObject;
-        Utils.AddMeshCollider(objBuilding);
-        objBuilding.AddComponent<SceneModelMono>();
-    }
+    } 
 
     private void LoadShopRoute(Message _msg)
     {
@@ -525,7 +513,7 @@ public class ShopModule : BaseModule
         theAllShopModelDic.AddRep(routeID, shopModelList);
         if (needCreateShop)
         {
-            CoroutineController.Instance.StartCoroutine(CreateShop());
+            MyFrameWork.MonoHelper.Instance.StartCoroutine(CreateShop());
         }
         return errorMsg;
     }
@@ -1230,50 +1218,52 @@ public class ShopModule : BaseModule
     /// </summary>
     void MoveShopModel()
     {
-        Vector3 dir = Vector3.zero;
-        Vector3 rot = Vector3.zero;
-        Vector3 sca = Vector3.zero;
-        if (!Input.GetKey(KeyCode.LeftAlt))
+        if (!Utils.IsOnUI && CurSelectShopModel != null)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-                dir += Vector3.forward;
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-                dir += Vector3.back;
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-                dir += Vector3.right;
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-                dir += Vector3.left;
-            if (Input.GetKeyDown(KeyCode.R))
-                dir += Vector3.up;
-            if (Input.GetKeyDown(KeyCode.F))
-                dir += Vector3.down;
-            if (CurSelectShopModel != null && dir != Vector3.zero)
-                CurSelectShopModel.Move(dir);
+            Vector3 dir = Vector3.zero;
+            Vector3 rot = Vector3.zero;
+            Vector3 sca = Vector3.zero;
+            if (!Input.GetKey(KeyCode.LeftAlt))
+            {
+                if (Input.GetKeyDown(KeyCode.UpArrow))
+                    dir += Vector3.forward;
+                if (Input.GetKeyDown(KeyCode.DownArrow))
+                    dir += Vector3.back;
+                if (Input.GetKeyDown(KeyCode.LeftArrow))
+                    dir += Vector3.right;
+                if (Input.GetKeyDown(KeyCode.RightArrow))
+                    dir += Vector3.left;
+                if (Input.GetKeyDown(KeyCode.R))
+                    dir += Vector3.up;
+                if (Input.GetKeyDown(KeyCode.F))
+                    dir += Vector3.down;
+                if (CurSelectShopModel != null && dir != Vector3.zero)
+                    CurSelectShopModel.Move(dir);
 
-            if (Input.GetKeyDown(KeyCode.Q))
-                rot += Vector3.down;
-            if (Input.GetKeyDown(KeyCode.E))
-                rot += Vector3.up;
-            if (CurSelectShopModel != null && rot != Vector3.zero)
-                CurSelectShopModel.Rotate(rot);
+                if (Input.GetKeyDown(KeyCode.Q))
+                    rot += Vector3.down;
+                if (Input.GetKeyDown(KeyCode.E))
+                    rot += Vector3.up;
+                if (CurSelectShopModel != null && rot != Vector3.zero)
+                    CurSelectShopModel.Rotate(rot);
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.UpArrow))
+                    sca += Vector3.down;
+                if (Input.GetKeyDown(KeyCode.DownArrow))
+                    sca += Vector3.up;
+                if (Input.GetKeyDown(KeyCode.LeftArrow))
+                    sca += Vector3.right;
+                if (Input.GetKeyDown(KeyCode.RightArrow))
+                    sca += Vector3.left;
+                if (CurSelectShopModel != null && sca != Vector3.zero)
+                    CurSelectShopModel.Scale(sca);
+            }
+
+            if (dir != Vector3.zero || rot != Vector3.zero || sca != Vector3.zero)
+                onDataChange();
         }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-                sca += Vector3.down;
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-                sca += Vector3.up;
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-                sca += Vector3.right;
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-                sca += Vector3.left;
-            if (CurSelectShopModel != null && sca != Vector3.zero)
-                CurSelectShopModel.Scale(sca);
-        }
-
-        if (dir != Vector3.zero || rot != Vector3.zero || sca != Vector3.zero)
-            onDataChange();
-
     }
 
     void onDataChange()

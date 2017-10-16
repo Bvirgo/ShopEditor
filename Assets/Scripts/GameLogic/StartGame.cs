@@ -10,26 +10,42 @@ public class StartGame : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        // 初始化网络
+        // Server Net
         InitNet();
 
-        // 鼠标管理器
+        // Mouse Manager
         MouseManager.Instance.OnInit();
 
-        // 加载数据模块
-        ModuleManager.Instance.RegisterAllModules();
+        // Level Manager
+        LevelManager.Instance.OnInit();
 
-        // 打开指定UI
-		UIManager.Instance.OpenUI(UIType.Login,true);
-	}
+        // UI Pool
+        UIPoolManager.Instance.OnInit();
+
+        // Load First Scene
+        LoadFirstScn();
+    }
 
     /// <summary>
-    /// 初始化网络
+    /// Init Net
     /// </summary>
     private void InitNet()
     {
         WWWManager.Instance.Init(Defines.ServerAddress, Jhqc.EditorCommon.LogType.None);// 外网
         WWWManager.Instance.TimeOut = 600f;
+    }
+
+    /// <summary>
+    /// Load First Scene
+    /// </summary>
+    private void LoadFirstScn()
+    {
+
+        // Register Login Scene Module
+        ModuleManager.Instance.RegisterModule(typeof(LoginScn));
+
+        // Open Login View
+        UIManager.Instance.OpenUI(UIType.Login, true);
     }
 
 }

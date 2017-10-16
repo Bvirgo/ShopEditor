@@ -18,7 +18,7 @@ namespace ArtsWork
     //RemoteDataCoroutine<TResult> HttpResp
     public class RemoteDataCoroutine : IRemoteCoroutine
     {
-        static protected MonoBehaviour _coroutineProxy = CoroutineController.Instance;
+        static protected MonoBehaviour _coroutineProxy = MyFrameWork.MonoHelper.Instance;
 
         protected bool _isDataInterchanging;
         protected bool _isForceRequest;
