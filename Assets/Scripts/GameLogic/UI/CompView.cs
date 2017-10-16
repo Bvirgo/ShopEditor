@@ -5,7 +5,7 @@ using MyFrameWork;
 using UnityEngine.UI;
 using System;
 
-public class MainView : BaseUI {
+public class CompView : BaseUI {
     #region UI
     [HideInInspector,AutoUGUI]
     public Button btn_load;

@@ -40,18 +40,18 @@ public class LoginModule : BaseModule {
         {       
             if (success)
             {
-                //Debug.Log("登录返回信息：" + resp.WwwText);
                 UserCache.SetUserName(strUser);
                 UserCache.SetPassword(strPsw);
-                //JsonData js = JsonMapper.ToObject(resp.WwwText);
-                //msg = new Message(MsgType.ShopView_Show, this);
-                //msg.Send();
 
+                // 组件编辑器
+                //LevelManager.Instance.ChangeSceneDirect(ScnType.CompEditor,UIType.CompEditor);
+
+                // 商铺编辑器
                 LevelManager.Instance.ChangeSceneDirect(ScnType.ShopEditor, UIType.ShopEditor);
             }
             else
             {
-                Debug.LogError("登录失败："+resp.Error);
+                Debug.LogError("LoginError："+resp.Error);
             }
 
             LogicUtils.Instance.OnHideWaiting();

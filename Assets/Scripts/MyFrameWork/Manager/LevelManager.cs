@@ -77,6 +77,8 @@ namespace MyFrameWork
             RegisterScene(ScnType.LoginScene, "LoginScene", typeof(LoginScn), null);
 
             RegisterScene(ScnType.ShopEditor, ScnType.ShopEditor.ToString(), typeof(ShopEditorScn), null);
+
+            RegisterScene(ScnType.CompEditor, ScnType.CompEditor.ToString(), typeof(CompEditorScn), null);
         }
 
         /// <summary>

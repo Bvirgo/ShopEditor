@@ -7,7 +7,7 @@ using System.IO;
 using System;
 using System.Text;
 
-public class MainModule : BaseModule {
+public class CompModule : BaseModule {
 
     #region Member
     private Queue<string> m_qResPaths;
@@ -20,7 +20,7 @@ public class MainModule : BaseModule {
 
     private List<ComProperty> m_pComProperty;
     private GameObject m_objRoot;
-    public MainModule()
+    public CompModule()
     {
         this.AutoRegister = true;
     }
@@ -32,11 +32,12 @@ public class MainModule : BaseModule {
         InitData();
 
         Register();
+
+        LoadCompConfig();
     }
 
     private void Register()
     {
-        MessageCenter.Instance.AddListener(MsgType.MainView_Show, OnInit);
         MessageCenter.Instance.AddListener(MsgType.MainView_ReplaceAll, OnReplaceAll);
         MessageCenter.Instance.AddListener(MsgType.MainView_TagItemClick, TagItemClick);
         MessageCenter.Instance.AddListener(MsgType.MainView_ComItemClick, ComItemClick);
@@ -62,6 +63,9 @@ public class MainModule : BaseModule {
         code_CompConfig = new Dictionary<string, CompConfigData>();
         m_pUpdateErComp = new List<CompConfigData>();
         m_pMemeryRes = new List<IResourceNode>();
+
+        tag_comPropertys = new Dictionary<string, List<ComProperty>>();
+        m_strCurTag = "";
     }
     protected override void OnRelease()
     {
@@ -72,7 +76,6 @@ public class MainModule : BaseModule {
 
     private void UnRegister()
     {
-        MessageCenter.Instance.RemoveListener(MsgType.MainView_Show, OnInit);
         MessageCenter.Instance.RemoveListener(MsgType.MainView_ReplaceAll, OnReplaceAll);
         MessageCenter.Instance.RemoveListener(MsgType.MainView_TagItemClick, TagItemClick);
         MessageCenter.Instance.RemoveListener(MsgType.MainView_ComItemClick, ComItemClick);
@@ -315,14 +318,8 @@ public class MainModule : BaseModule {
 
     #region Common
     private Dictionary<string, List<ComProperty>> tag_comPropertys;
-    private void OnInit(Message _msg)
+    private void LoadCompConfig()
     {
-        UIManager.Instance.OpenUICloseOthers(UIType.CompEditor, false);
-
-        JHQCHelper.Instance.OnInitScene();
-
-        tag_comPropertys = new Dictionary<string, List<ComProperty>>();
-        m_strCurTag = "";
         // 加载组件配置
         RefreshCom();
     }
@@ -577,7 +574,7 @@ public class MainModule : BaseModule {
             return;
         }
 
-        MainView mv = _msg.Sender as MainView;
+        CompView mv = _msg.Sender as CompView;
         if (mv == null)
         {
             return;

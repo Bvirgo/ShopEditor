@@ -234,6 +234,10 @@ namespace MyFrameWork
                     _uiPrefab = "ShopView";
                     break;
 
+                case UIType.CompEditor:
+                    _uiPrefab = "MainView";
+                    break;
+
                 default:
                     Debug.Log("Not Find EnumUIType! type: " + _uiType.ToString());
                     break;
@@ -270,6 +274,10 @@ namespace MyFrameWork
 
                 case UIType.ShopEditor:
                     _scriptType = typeof(ShopView);
+                    break;
+
+                case UIType.CompEditor:
+                    _scriptType = typeof(CompView);
                     break;
                 default:
                     Debug.Log("Not Find EnumUIType! type: " + _uiType.ToString());

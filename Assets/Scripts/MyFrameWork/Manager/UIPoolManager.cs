@@ -67,6 +67,10 @@ public class UIPoolManager : DDOLSingleton<UIPoolManager>
         }
     }
 
+    /// <summary>
+    /// Destory All Spawn
+    /// </summary>
+    /// <param name="_tf"></param>
     public void DeSpawnAll(Transform _tf)
     {
         if (_tf != null )
@@ -87,7 +91,6 @@ public class UIPoolManager : DDOLSingleton<UIPoolManager>
         PrefabPool pp = _pp;
         if (!m_uiPool._perPrefabPoolOptions.Contains(pp))
         {
-            //r1 = new PrefabPool(Resources.Load<Transform>("momo"));
             //默认初始化5个Prefab实例
             pp.preloadAmount = 10;
             //开启限制
