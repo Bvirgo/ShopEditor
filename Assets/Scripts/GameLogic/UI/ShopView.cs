@@ -36,6 +36,9 @@ public class ShopView : BaseUI
     private string m_strSampleBoardItem;
     private string m_strShopItem;
 
+    //private GameObject m_objSampleBoard;
+    //private GameObject m_objShopItem;
+
     enum RefreshType
     {
         BoardList,
@@ -77,7 +80,7 @@ public class ShopView : BaseUI
         //m_objSampleBoard = ResManager.Instance.Load(UIPathDefines.UI_PREFAB + "SampleBoardItem") as GameObject;
         //m_objShopItem = ResManager.Instance.Load(UIPathDefines.UI_PREFAB + "ShopItem") as GameObject;
 
-        //  UI Pool
+        //  UI Pool 
         UIPoolManager.Instance.PushPrefab(m_strSampleBoardItem);
         UIPoolManager.Instance.PushPrefab(m_strShopItem);
 
@@ -85,7 +88,7 @@ public class ShopView : BaseUI
         {
             Message msg = new Message(MsgType.ShopView_LoadRoute,this);
             // 测试用例
-            msg["route"] = "03941001001";
+            msg["route"] = Defines.TestShopRoute;
             msg.Send();
         });
 
@@ -182,6 +185,7 @@ public class ShopView : BaseUI
 
         int nLenth = nGridHeight * _pSss.Count;
         UIPoolManager.Instance.DeSpawnAll(tfGrid);
+        //Utils.RemoveChildren(tfGrid);
 
         if (_rType == RefreshType.SampleBoardList)
         {
@@ -197,7 +201,7 @@ public class ShopView : BaseUI
         for (int i = 0; i < _pSss.Count; i++)
         {
             ShopSignVO ssv = _pSss[i];
-            //Transform tf = GameObject.Instantiate(objPrefab).transform;
+            //Transform tf = GameObject.Instantiate(m_objSampleBoard).transform;
             Transform tf = UIPoolManager.Instance.OnGetItem(m_strSampleBoardItem);
 
             Image img_top = tf.Find("img_top").GetComponent<Image>();
@@ -207,7 +211,7 @@ public class ShopView : BaseUI
             Text txt_shopCode = tf.Find("txt_shopCode").GetComponent<Text>();
             Text txt_prefabType = tf.Find("txt_prefabType").GetComponent<Text>();
             Text txt_shopId = tf.Find("txt_shopId").GetComponent<Text>();
-            Text txt_cellNum = tf.Find("txt_cellNum").GetComponent<Text>();
+            Text txt_cellNum = tf.Find("txt_cellNum").GetComponent<Text>(); 
 
             InputField ipt_shopName = tf.Find("ipt_shopName").GetComponent<InputField>();
             Toggle tg = tf.GetComponent<Toggle>();
@@ -218,11 +222,14 @@ public class ShopView : BaseUI
             if (_rType == RefreshType.BoardList)
             {
                 btn_close.gameObject.SetActive(true);
+                btn_close.onClick.RemoveAllListeners();
                 btn_close.onClick.AddListener(()=> 
                 {
                     Message msg = new Message(MsgType.ShopView_DeleteBoard, this);
                     msg["data"] = ssv;
                     msg.Send();
+
+                    Debug.LogWarning(string.Format("Delete Board:{0}",ssv.m_strShopShowName));
                 });
             }
 
@@ -240,7 +247,7 @@ public class ShopView : BaseUI
             {
                 ipt_shopName.enabled = false;
                 ipt_shopName.interactable = false;
-
+                tg.onValueChanged.RemoveAllListeners();
                 tg.onValueChanged.AddListener(bGo =>
                 {
                     if (bGo)
@@ -308,6 +315,7 @@ public class ShopView : BaseUI
                 Text txt_index = tfShopItem.Find("txt_index").GetComponent<Text>();
                 Text txt_info = tfShopItem.Find("txt_info").GetComponent<Text>();
                 Button btn_close = tfShopItem.Find("btn_close").GetComponent<Button>();
+                btn_close.onClick.RemoveAllListeners();
                 btn_close.onClick.AddListener(() =>
                 {
                     Message msg = new Message(MsgType.ShopView_DeleteShop, this);
@@ -320,6 +328,7 @@ public class ShopView : BaseUI
                 tfShopItem.SetParent(shopsGrid);
 
                 Toggle tg = tfShopItem.GetComponent<Toggle>();
+                tg.onValueChanged.RemoveAllListeners();
                 tg.onValueChanged.AddListener((bGo) =>
                 {
                     if (bGo)

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System;
 
 public class CompView : BaseUI {
+
     #region UI
     [HideInInspector,AutoUGUI]
     public Button btn_load;
@@ -272,5 +273,4 @@ public class CompView : BaseUI {
         txt_file.text = _strModelName;
     }
     #endregion
-
 }

@@ -1002,27 +1002,27 @@ public static class Utils
     /// 设置RectTransform
     /// </summary>
     /// <param name="_tf"></param>
-    /// <param name="_fX"></param>
-    /// <param name="_fY"></param>
-    public static void ResetRectTransform(Transform _tf,float _fX = -1,float _fY = -1)
+    /// <param name="_fWidth">宽度</param>
+    /// <param name="_fHeight">高度</param>
+    public static void ResetRectTransform(Transform _tf,float _fWidth = -1,float _fHeight = -1)
     {
         if (_tf != null)
         {
             RectTransform rtf = _tf.GetComponent<RectTransform>();
 
-            if (-1 == _fX)
+            if (-1 == _fWidth)
             {
-                _fX = rtf.sizeDelta.x;
+                _fWidth = rtf.sizeDelta.x;
             }
 
-            if (-1 == _fY)
+            if (-1 == _fHeight)
             {
-                _fY = rtf.sizeDelta.y;
+                _fHeight = rtf.sizeDelta.y;
             }
 
             if (rtf != null)
             {
-                rtf.sizeDelta = new Vector2(_fX,_fY);
+                rtf.sizeDelta = new Vector2(_fWidth,_fHeight);
             }
         }
     }

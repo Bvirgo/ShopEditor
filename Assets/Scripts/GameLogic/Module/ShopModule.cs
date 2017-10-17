@@ -296,10 +296,7 @@ public class ShopModule : BaseModule
                     ShopRouteData srd = new ShopRouteData(routeID, configStr, shopListStr, picPathArr);
                     theAllShopRouteDic.AddRep(routeID, srd);
 
-                    // TODO:刷新列表
-                    // 右侧：招牌模版列表：theOriShopSignList
-                    // 左侧：商铺列表:theShopModelList
-
+                    // TODO:刷新UI
                     // 同步招牌图片数据
                     for (int i = 0; i < theOriShopSignList.Count; i++)
                     {
@@ -1359,6 +1356,7 @@ public class ShopModule : BaseModule
             Message msg = new Message(MsgType.ShopView_RefreshBoardList, this);
             msg["data"] = CurSelectShopModel.ShopSignList;
             msg.Send();
+            Debug.LogWarning(string.Format("当前商铺，还有招牌数：{0}",CurSelectShopModel.ShopSignList.Count));
         }
     }
 

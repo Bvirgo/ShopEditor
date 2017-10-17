@@ -202,22 +202,6 @@ namespace MyFrameWork
             {
                 ChangeSceneDirect(_sceneType);
             }
-
-            //         // 场景已经切换
-            //if (LastSceneType == _sceneType)
-            //{
-            //             // 场景对应UI已经打开
-            //	if (sceneOpenUIType == UIType.None)
-            //	{
-            //		return;
-            //	}
-            //             // 场景已经切换了，但是对应UI没有打开
-            //	UIManager.Instance.OpenUICloseOthers( sceneOpenUIType, false,sceneOpenUIParams);
-            //	sceneOpenUIType = UIType.None;
-            //}else
-            //{
-                //ChangeSceneDirect(_sceneType);
-            //}
         }
 
         /// <summary>

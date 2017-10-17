@@ -293,19 +293,23 @@ namespace MyFrameWork
     #region Global Const String
     public static class Defines
     {
+        /**WaitingView**/
         public const string WaitingType_Clock = "clock";
         public const string WaitingType_Percent = "percent";
 
+        /**Server**/
         public const string ServerAddress = "139.198.2.58:8000";
 
+        /**AlertWindow**/
         public const string AlertType_Single = "Alert_Single";
         public const string AlertType_List = "Alert_List";
-        
+
+        /**Test Scene**/
         public const string PlayerModel = "SantaMale/Prefabs/SantaMale";
         public const string MainGroundPath = "Maps/Ground";
         public const string WhiteHousePath = "Building/WhiteHouse";
-
         public const string MapsLayerName = "Ground";
+        public const string TestShopRoute = "03941001001";
     }
     #endregion
 

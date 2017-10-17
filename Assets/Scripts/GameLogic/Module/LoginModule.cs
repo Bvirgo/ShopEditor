@@ -44,7 +44,7 @@ public class LoginModule : BaseModule {
                 UserCache.SetPassword(strPsw);
 
                 // 组件编辑器
-                //LevelManager.Instance.ChangeSceneDirect(ScnType.CompEditor,UIType.CompEditor);
+                //LevelManager.Instance.ChangeSceneDirect(ScnType.CompEditor, UIType.CompEditor);
 
                 // 商铺编辑器
                 LevelManager.Instance.ChangeSceneDirect(ScnType.ShopEditor, UIType.ShopEditor);
