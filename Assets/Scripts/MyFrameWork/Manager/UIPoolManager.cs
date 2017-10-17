@@ -63,7 +63,11 @@ public class UIPoolManager : DDOLSingleton<UIPoolManager>
     {
         if (m_uiPool.IsSpawned(_tf))
         {
-            m_uiPool.Despawn(_tf);
+            if (_tf != null)
+            {
+                m_uiPool.Despawn(_tf);
+                _tf.SetParent(transform);
+            }
         }
     }
 

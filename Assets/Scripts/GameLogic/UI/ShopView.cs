@@ -166,7 +166,8 @@ public class ShopView : BaseUI
         }
         else
         {
-            Utils.RemoveChildren(boardGrid);
+            //Utils.RemoveChildren(boardGrid);
+            UIPoolManager.Instance.DeSpawnAll(boardGrid);
         }
     }
 
@@ -216,7 +217,7 @@ public class ShopView : BaseUI
             InputField ipt_shopName = tf.Find("ipt_shopName").GetComponent<InputField>();
             Toggle tg = tf.GetComponent<Toggle>();
             tg.group = tgg;
-
+            tg.isOn = false;
             Button btn_close = tf.Find("btn_close").GetComponent<Button>();
             btn_close.gameObject.SetActive(false);
             if (_rType == RefreshType.BoardList)
@@ -328,6 +329,7 @@ public class ShopView : BaseUI
                 tfShopItem.SetParent(shopsGrid);
 
                 Toggle tg = tfShopItem.GetComponent<Toggle>();
+                tg.isOn = false;
                 tg.onValueChanged.RemoveAllListeners();
                 tg.onValueChanged.AddListener((bGo) =>
                 {

@@ -193,27 +193,6 @@ namespace MyFrameWork
             }
         }
         #endregion
-
-        #region Keyboard Event
-        void FixedUpdate()
-        {
-            if (!Utils.IsOnUI)
-            {
-                if (Input.anyKeyDown)
-                {
-                    Message msg = new Message(MsgType.Com_AnyKeyDown,this);
-                    msg.Send();
-                }
-                if (Input.anyKey)
-                {
-                    Message msg = new Message(MsgType.Com_AnyKeyHeld, this);
-                    msg.Send();
-                }
-
-            }
-        }
-        #endregion
-
     }
 }
 

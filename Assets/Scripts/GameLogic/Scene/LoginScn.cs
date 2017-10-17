@@ -32,6 +32,8 @@ public class LoginScn : BaseScene
     private void RegisterModule()
     {
         ModuleManager.Instance.RegisterModule(typeof(LoginModule));
+        ModuleManager.Instance.RegisterModule(typeof(WindowModule));
+        ModuleManager.Instance.RegisterModule(typeof(WaitingModule));
     }
     #endregion
 }
