@@ -25,7 +25,7 @@ public class SceneModelMono : MonoBehaviour,IMouseCtrl
     #region Mouse Event
     public void MouseClick(Vector2 screenPoint, Vector3 worldPoint, int mouse)
     {
-        Debug.LogWarning(string.Format("Building:{0},Is Clicked!", name));
+        //Debug.LogWarning(string.Format("Building:{0},Is Clicked!", name));
         Message msg = new Message(MsgType.ShopView_NewPoint,this);
         msg["guid"] = guid;
         msg["pos"] = worldPoint;
@@ -61,5 +61,4 @@ public class SceneModelMono : MonoBehaviour,IMouseCtrl
         //m_vDragBias = transform.position - Utils.GetPointOnLayer(Defines.MapsLayerName);
     }
     #endregion
-
 }

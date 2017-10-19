@@ -991,6 +991,34 @@ public static class Utils
     }
 
     /// <summary>
+    /// Mouse Is On InputField
+    /// </summary>
+    /// <returns></returns>
+    public static bool IsOnInputField()
+    {
+        Vector2 screenPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+
+        //实例化点击事件
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        //将点击位置的屏幕坐标赋值给点击事件
+        eventDataCurrentPosition.position = new Vector2(screenPosition.x, screenPosition.y);
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        //向点击处发射射线
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+
+        for (int i = 0; i < results.Count; i++)
+        {
+            GameObject obj = results[i].gameObject;
+            if (obj.GetComponent<InputField>() != null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
     /// 鼠标是否在UGUI上
     /// </summary>
     public static bool IsOnUI

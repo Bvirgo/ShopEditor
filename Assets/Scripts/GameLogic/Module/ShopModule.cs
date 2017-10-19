@@ -141,6 +141,7 @@ public class ShopModule : BaseModule
         MessageCenter.Instance.AddListener(MsgType.ShopView_OnlyBoard,OnlyBoardModel);
         MessageCenter.Instance.AddListener(MsgType.ShopView_OnlyShop, OnlyShopModel);
         MessageCenter.Instance.AddListener(MsgType.ShopView_ShopAndBoard, ShopAndBoardModel);
+        MessageCenter.Instance.AddListener(MsgType.ShopView_CancelPoint,CancelClickPoint);
 
     }
 
@@ -156,6 +157,7 @@ public class ShopModule : BaseModule
         MessageCenter.Instance.RemoveListener(MsgType.ShopView_OnlyBoard, OnlyBoardModel);
         MessageCenter.Instance.RemoveListener(MsgType.ShopView_OnlyShop, OnlyShopModel);
         MessageCenter.Instance.RemoveListener(MsgType.ShopView_ShopAndBoard, ShopAndBoardModel);
+        MessageCenter.Instance.RemoveListener(MsgType.ShopView_CancelPoint, CancelClickPoint);
     } 
 
     private void LoadShopRoute(Message _msg)
@@ -947,6 +949,10 @@ public class ShopModule : BaseModule
         shopSignEditorVoList.Add(vo);
     }
 
+    private void CancelClickPoint(Message _msg)
+    {
+        CancelClickPoint();
+    }
 
     /// <summary>
     /// Cancel Point

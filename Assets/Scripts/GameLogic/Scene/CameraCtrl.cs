@@ -88,11 +88,17 @@ public class CameraCtrl : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Utils.IsOnUI)
+        if (Utils.IsOnInputField())
         {
-            //Debug.LogWarning("Is Ui................");
+            //Debug.Log("Input Field");
             return;
         }
+
+        //if (Utils.IsOnUI)
+        //{
+        //    //Debug.LogWarning("Is Ui................");
+        //    return;
+        //}
 
         if (CameraState == EnumCameraState.normal)
             FocusDistanceCtrl();

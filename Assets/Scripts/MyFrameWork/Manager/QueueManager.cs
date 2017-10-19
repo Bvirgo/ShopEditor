@@ -162,7 +162,10 @@ namespace MyFrameWork
 
                         if (m_pRuningList.Count == 0 && m_pWaitingList.Count == 0)
                         {
-                            m_actAllDone();
+                            if (m_actAllDone != null)
+                            {
+                                m_actAllDone();
+                            }
                         }
                     });
                 }

@@ -131,20 +131,20 @@ namespace MyFrameWork
 
     public enum PropertyType : int
     {
-        RoleName = 1, // 角色名
-        Sex,     // 性别
-        RoleID,  // Role ID
-        Gold,    // 宝石(元宝)
-        Coin,    // 金币(铜板)
-        Level,   // 等级
-        Exp,     // 当前经验
+        RoleName = 1, 
+        Sex,    
+        RoleID, 
+        Gold,   
+        Coin,  
+        Level,   
+        Exp,    
 
-        AttackSpeed,//攻击速度
-        HP,     //当前HP
-        HPMax,  //生命最大值
-        Attack, //普通攻击（点数）
-        Water,  //水系攻击（点数）
-        Fire,   //火系攻击（点数）
+        AttackSpeed,
+        HP,     
+        HPMax, 
+        Attack, 
+        Water, 
+        Fire, 
     }
 
     /// <summary>
