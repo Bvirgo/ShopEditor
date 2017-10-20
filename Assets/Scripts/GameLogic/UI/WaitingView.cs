@@ -31,7 +31,6 @@ public class WaitingView : BaseUI {
         m_bClock = false;
         m_strTips = "加载进度";
         m_nTotal = -1;
-        MonoHelper.Instance.UpdateRegister(Update);
 
         Message msg = uiParams[0] as Message;
         m_strTips = msg["tips"].ToString();
@@ -47,13 +46,15 @@ public class WaitingView : BaseUI {
         base.OnAwake();
     }
 
-    private void Update()
+    protected override void OnUpdate(float deltaTime)
     {
+        base.OnUpdate(deltaTime);
         if (m_bClock)
         {
             m_waitingImg.Rotate(new Vector3(0, 0, -100 * Time.deltaTime));
         }
     }
+    
     protected override void OnRelease()
     {
         base.OnRelease();
