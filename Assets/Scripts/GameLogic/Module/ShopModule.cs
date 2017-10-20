@@ -9,7 +9,7 @@ using System.Collections.Specialized;
 using ArtsWork;
 using SimpleJSON;
 using System.Text;
-using MyFrameWork;
+using ZFrameWork;
 using ReadWriteCsv;
 using System.Drawing;
 
@@ -512,7 +512,7 @@ public class ShopModule : BaseModule
         theAllShopModelDic.AddRep(routeID, shopModelList);
         if (needCreateShop)
         {
-            MyFrameWork.MonoHelper.Instance.StartCoroutine(CreateShop());
+            ZFrameWork.MonoHelper.Instance.StartCoroutine(CreateShop());
         }
         return errorMsg;
     }

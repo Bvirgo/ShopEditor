@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-namespace MyFrameWork
+namespace ZFrameWork
 {
 	public class Message : IEnumerable<KeyValuePair<string, object>>
 	{
@@ -21,7 +21,7 @@ namespace MyFrameWork
 		#region message[key] = value or data = message[key]
 
 		/// <summary>
-		/// Gets or sets the <see cref="MyFrameWork.Message"/> with the specified key.
+		/// Gets or sets the <see cref="ZFrameWork.Message"/> with the specified key.
 		/// </summary>
 		/// <param name="key">Key.</param>
 		public object this[string key]
@@ -76,7 +76,7 @@ namespace MyFrameWork
 		#region Message Construction Function
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="MyFrameWork.Message"/> class.
+		/// Initializes a new instance of the <see cref="ZFrameWork.Message"/> class.
 		/// </summary>
 		/// <param name="name">Name.</param>
 		/// <param name="sender">Sender.</param>
@@ -88,7 +88,7 @@ namespace MyFrameWork
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="MyFrameWork.Message"/> class.
+		/// Initializes a new instance of the <see cref="ZFrameWork.Message"/> class.
 		/// </summary>
 		/// <param name="name">Name.</param>
 		/// <param name="sender">Sender.</param>
@@ -101,7 +101,7 @@ namespace MyFrameWork
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="MyFrameWork.Message"/> class.
+		/// Initializes a new instance of the <see cref="ZFrameWork.Message"/> class.
 		/// </summary>
 		/// <param name="name">Name.</param>
 		/// <param name="sender">Sender.</param>
@@ -126,7 +126,7 @@ namespace MyFrameWork
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="MyFrameWork.Message"/> class.
+		/// Initializes a new instance of the <see cref="ZFrameWork.Message"/> class.
 		/// </summary>
 		/// <param name="message">Message.</param>
 		public Message (Message message)

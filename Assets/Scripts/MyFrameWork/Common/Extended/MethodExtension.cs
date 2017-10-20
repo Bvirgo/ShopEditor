@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace MyFrameWork
+namespace ZFrameWork
 {
 	static public class MethodExtension
 	{

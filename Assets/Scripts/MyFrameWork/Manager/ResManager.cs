@@ -7,7 +7,7 @@ using Jhqc.EditorCommon;
 using System.IO;
 using Jhqc.UnityFbxLoader;
 
-namespace MyFrameWork
+namespace ZFrameWork
 {
     /// <summary>
     /// Resource Folder Res

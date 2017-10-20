@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace MyFrameWork
+namespace ZFrameWork
 {
 
     #region Global delegate 委托

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MyFrameWork;
+using ZFrameWork;
 using System;
 using UnityEngine.UI;
 public class ShopView : BaseUI
@@ -149,7 +149,7 @@ public class ShopView : BaseUI
         List<ShopSignVO> pSsv = _msg["data"] as List<ShopSignVO>;
         if (pSsv != null)
         {
-            MyFrameWork.MonoHelper.Instance.StartCoroutine(RefreshBoardItemList(pSsv, RefreshType.SampleBoardList));
+            ZFrameWork.MonoHelper.Instance.StartCoroutine(RefreshBoardItemList(pSsv, RefreshType.SampleBoardList));
         }
     }
 
@@ -162,7 +162,7 @@ public class ShopView : BaseUI
         List<ShopSignVO> pSsv = _msg["data"] as List<ShopSignVO>;
         if (pSsv != null)
         {
-            MyFrameWork.MonoHelper.Instance.StartCoroutine(RefreshBoardItemList(pSsv, RefreshType.BoardList));
+            ZFrameWork.MonoHelper.Instance.StartCoroutine(RefreshBoardItemList(pSsv, RefreshType.BoardList));
         }
         else
         {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using MyFrameWork;
+using ZFrameWork;
 using UnityEngine.EventSystems;
 
 public class TestOne : BaseUI 

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using UnityEngine;
-using MyFrameWork;
+using ZFrameWork;
 
 namespace ArtsWork
 {
@@ -126,7 +126,7 @@ namespace ArtsWork
 
         void ActionReqest_RemoteGetData(List<object> listPms)
         {
-            MyFrameWork.MonoHelper.Instance.StartCoroutine(Co_Reqest_RemoteGetData());
+            ZFrameWork.MonoHelper.Instance.StartCoroutine(Co_Reqest_RemoteGetData());
         }
 
         IEnumerator Co_Reqest_RemoteGetData()

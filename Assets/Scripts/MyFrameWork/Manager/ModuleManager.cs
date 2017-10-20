@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 
-namespace MyFrameWork
+namespace ZFrameWork
 {
 	public class ModuleManager : Singleton<ModuleManager>
 	{

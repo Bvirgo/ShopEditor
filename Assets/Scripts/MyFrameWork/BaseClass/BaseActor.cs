@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MyFrameWork
+namespace ZFrameWork
 {
     /// <summary>
     /// 所有场景对象基类：NPC,Role,Monster

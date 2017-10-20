@@ -1,6 +1,6 @@
 
 using System;
-namespace MyFrameWork
+namespace ZFrameWork
 {
     /// <summary>
     /// 单一角色属性：比如：血量，魔法值等等

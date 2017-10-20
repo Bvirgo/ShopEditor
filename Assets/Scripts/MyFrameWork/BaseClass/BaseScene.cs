@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 
-namespace MyFrameWork
+namespace ZFrameWork
 {
     /// <summary>
     /// ³¡¾°»ùÀà£ºMainScene,LoginScene,CopyScene,PVEScene.....

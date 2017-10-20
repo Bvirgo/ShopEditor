@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using MyFrameWork;
+using ZFrameWork;
 using System;
 
 public class LoginView : BaseUI {

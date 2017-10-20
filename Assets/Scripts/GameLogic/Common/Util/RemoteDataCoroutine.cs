@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine;
 using System.Text;
 using System.Collections.Generic;
-using MyFrameWork;
+using ZFrameWork;
 
 namespace ArtsWork
 {
@@ -18,7 +18,7 @@ namespace ArtsWork
     //RemoteDataCoroutine<TResult> HttpResp
     public class RemoteDataCoroutine : IRemoteCoroutine
     {
-        static protected MonoBehaviour _coroutineProxy = MyFrameWork.MonoHelper.Instance;
+        static protected MonoBehaviour _coroutineProxy = ZFrameWork.MonoHelper.Instance;
 
         protected bool _isDataInterchanging;
         protected bool _isForceRequest;

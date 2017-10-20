@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-namespace MyFrameWork
+namespace ZFrameWork
 {
     /// <summary>
     /// 场景管理类

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using UnityEngine;
 
-namespace MyFrameWork
+namespace ZFrameWork
 {
     /// <summary>
     /// Common Logic Center

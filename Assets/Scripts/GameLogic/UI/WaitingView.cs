@@ -1,11 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MyFrameWork;
+using ZFrameWork;
 using UnityEngine.UI;
 using System;
-using UniRx;
-using UniRx.Triggers;
 
 public class WaitingView : BaseUI {
     #region UI & Member
@@ -33,10 +31,7 @@ public class WaitingView : BaseUI {
         m_bClock = false;
         m_strTips = "加载进度";
         m_nTotal = -1;
-
-        this.UpdateAsObservable()
-            .Where(_ => m_bClock)
-            .Subscribe(_ => m_waitingImg.Rotate(new Vector3(0, 0, -100 * Time.deltaTime)));
+        MonoHelper.Instance.UpdateRegister(Update);
 
         Message msg = uiParams[0] as Message;
         m_strTips = msg["tips"].ToString();
@@ -52,6 +47,13 @@ public class WaitingView : BaseUI {
         base.OnAwake();
     }
 
+    private void Update()
+    {
+        if (m_bClock)
+        {
+            m_waitingImg.Rotate(new Vector3(0, 0, -100 * Time.deltaTime));
+        }
+    }
     protected override void OnRelease()
     {
         base.OnRelease();

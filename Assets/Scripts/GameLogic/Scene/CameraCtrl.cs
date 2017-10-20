@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-using MyFrameWork;
+using ZFrameWork;
 
 public enum EnumCameraState
 {

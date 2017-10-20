@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace MyFrameWork
+namespace ZFrameWork
 {
 	public class MessageCenter : Singleton<MessageCenter>
 	{

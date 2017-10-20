@@ -5,7 +5,7 @@ using UnityEngine;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-namespace MyFrameWork
+namespace ZFrameWork
 {
 	/// <summary>
 	/// User interface manager.

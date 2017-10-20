@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace MyFrameWork
+namespace ZFrameWork
 {
 	#region Singleton<> first version
 	//public abstract class Singleton<T> where T : class, new() {

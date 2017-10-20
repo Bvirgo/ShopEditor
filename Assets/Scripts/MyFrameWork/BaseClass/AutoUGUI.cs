@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System;
 
-namespace MyFrameWork
+namespace ZFrameWork
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     public class AutoUGUI : Attribute

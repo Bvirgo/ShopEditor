@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
 
-namespace MyFrameWork
+namespace ZFrameWork
 {
 	public class TouchHandle
 	{

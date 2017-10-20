@@ -5,7 +5,7 @@ using LitJson;
 using System;
 using System.Drawing;
 using System.IO;
-using MyFrameWork;
+using ZFrameWork;
 using System.Text;
 
 public class ShopModelMono : MonoBehaviour, IJsonData, IListData

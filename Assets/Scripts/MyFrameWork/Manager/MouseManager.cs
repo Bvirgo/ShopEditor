@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-namespace MyFrameWork
+namespace ZFrameWork
 {
     /// <summary>
     /// 鼠标事件定义

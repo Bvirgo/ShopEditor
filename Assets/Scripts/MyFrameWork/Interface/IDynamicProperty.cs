@@ -1,7 +1,7 @@
 
 using System;
 
-namespace MyFrameWork
+namespace ZFrameWork
 {
 	public interface IDynamicProperty
 	{

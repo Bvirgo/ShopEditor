@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 
-namespace MyFrameWork
+namespace ZFrameWork
 {
     /// <summary>
     /// 大UI，需要纳入UIMgr管理的UI
