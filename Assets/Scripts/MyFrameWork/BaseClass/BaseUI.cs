@@ -9,7 +9,7 @@ using System.Collections.Generic;
 namespace ZFrameWork
 {
     /// <summary>
-    /// 大UI，需要纳入UIMgr管理的UI
+    /// View Base Class
     /// </summary>
     public abstract class BaseUI : MonoBehaviour
     {
@@ -93,103 +93,10 @@ namespace ZFrameWork
 
         #endregion
 
-        #region EventList
+        #region Event
         public Dictionary<string, MessageEvent> event_action;
-        #endregion
-
         /// <summary>
-        /// UI层级置顶
-        /// </summary>
-        protected virtual void SetDepthToTop()
-        {
-
-        }
-
-        // Use this for initialization
-        void Start()
-        {
-            OnStart();
-        }
-
-        void Awake()
-        {
-            this.State = EnumObjectState.Initial;
-            event_action = new Dictionary<string, MessageEvent>();
-            OnAwake();
-        }
-       
-        // Update is called once per frame
-        void Update()
-        {
-            if (EnumObjectState.Ready == this.state)
-            {
-                OnUpdate(Time.deltaTime);
-            }
-        }
-
-        /// <summary>
-        /// Release this instance.
-        /// </summary>
-        public void Release()
-        {
-            this.State = EnumObjectState.Closing;
-            GameObject.Destroy(cachedGameObject);
-            OnRelease();
-        }
-
-        protected virtual void OnStart()
-        {
-
-        }
-
-        protected virtual void OnAwake()
-        {
-            this.State = EnumObjectState.Loading;
-            //播放音乐
-            this.OnPlayOpenUIAudio();
-        }
-
-        protected virtual void OnUpdate(float deltaTime)
-        {
-
-        }
-
-        protected virtual void OnRelease()
-        {
-            this.OnPlayCloseUIAudio();
-            OnRemoveEvent();
-        }
-
-
-        /// <summary>
-        /// 播放打开界面音乐
-        /// </summary>
-        protected virtual void OnPlayOpenUIAudio()
-        {
-
-        }
-
-        /// <summary>
-        /// 播放关闭界面音乐
-        /// </summary>
-        protected virtual void OnPlayCloseUIAudio()
-        {
-
-        }
-
-        protected virtual void SetUI(params object[] uiParams)
-        {
-            this.State = EnumObjectState.Loading;
-            this.uiParams = uiParams;
-        }
-
-        public virtual void SetUIparam(params object[] uiParams)
-        {
-
-        }
-
-        /// <summary>
-        /// 清除注册事件
+        /// Clean Events
         /// </summary>
         protected virtual void OnRemoveEvent()
         {
@@ -200,7 +107,7 @@ namespace ZFrameWork
         }
 
         /// <summary>
-        /// 缓存事件
+        /// Cache Events
         /// </summary>
         /// <param name="_strEvent"></param>
         /// <param name="_msg"></param>
@@ -211,15 +118,65 @@ namespace ZFrameWork
                 event_action.Add(_strEvent, _msg);
             }
         }
+        #endregion
 
+        #region When Open
+        void Awake()
+        {
+            this.State = EnumObjectState.Initial;
+            event_action = new Dictionary<string, MessageEvent>();
+            OnAwake();
+        }
+
+        // Use this for initialization
+        void Start()
+        {
+            OnStart();
+        }
+
+        protected virtual void OnAwake()
+        {
+            this.State = EnumObjectState.Loading;
+            // Play When Open
+            this.OnPlayOpenUIAudio();
+        }
+
+        protected virtual void OnStart()
+        {
+
+        }
+
+
+        /// <summary>
+        /// Play Music When Open
+        /// </summary>
+        protected virtual void OnPlayOpenUIAudio()
+        {
+
+        }
+
+        protected virtual void SetUI(params object[] uiParams)
+        {
+            this.State = EnumObjectState.Loading;
+            this.uiParams = uiParams;
+        }
+
+        /// <summary>
+        /// Load Data When Open
+        /// </summary>
         protected virtual void OnLoadData()
         {
 
         }
 
+        /// <summary>
+        /// Set Params & Async Load Data When Open
+        /// </summary>
+        /// <param name="uiParams"></param>
         public void SetUIWhenOpening(params object[] uiParams)
         {
             SetUI(uiParams);
+
             MonoHelper.Instance.StartCoroutine(AsyncOnLoadData());
         }
 
@@ -232,6 +189,60 @@ namespace ZFrameWork
                 this.State = EnumObjectState.Ready;
             }
         }
+
+        #endregion
+
+        #region When Close
+
+        /// <summary>
+        /// Release this instance.
+        /// </summary>
+        public void Release()
+        {
+            this.State = EnumObjectState.Closing;
+            GameObject.Destroy(cachedGameObject);
+            OnRelease();
+        }
+
+
+        protected virtual void OnRelease()
+        {
+            this.OnPlayCloseUIAudio();
+            OnRemoveEvent();
+        }
+
+        /// <summary>
+        /// Play Music When Close
+        /// </summary>
+        protected virtual void OnPlayCloseUIAudio()
+        {
+
+        }
+        #endregion
+
+        #region Update
+        /// <summary>
+        /// UI Top
+        /// </summary>
+        protected virtual void SetDepthToTop()
+        {
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (EnumObjectState.Ready == this.state)
+            {
+                OnUpdate(Time.deltaTime);
+            }
+        }
+
+        protected virtual void OnUpdate(float deltaTime)
+        {
+
+        }
+        #endregion
     }
 }
 
